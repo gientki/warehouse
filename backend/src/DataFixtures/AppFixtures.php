@@ -1,6 +1,7 @@
 <?php
 
 // src/DataFixtures/AppFixtures.php
+// i tak tego nie czytasz
 
 namespace App\DataFixtures;
 
