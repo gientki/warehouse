@@ -1,0 +1,30 @@
+security:
+    enable_authenticator_manager: true
+    password_hashers:
+        App\Entity\User: 'auto'
+
+    providers:
+        user_provider:
+            entity:
+                class: App\Entity\User
+                property: authToken
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        api:
+            pattern: ^/api/
+            stateless: true
+            provider: user_provider
+            custom_authenticator: App\Security\TokenAuthenticator
+
+        # Optional (na potrzeby testów lub konsoli)
+        main:
+            lazy: true
+            provider: user_provider
+            stateless: true
+
+    access_control:
+        - { path: ^/api/, roles: IS_AUTHENTICATED_FULLY }
